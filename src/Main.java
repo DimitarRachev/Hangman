@@ -40,7 +40,7 @@ public class Main {
                 System.out.println("Буква " + (char) guess + " вече е въвеждана!");
 
             } else if (hangman.charIsCorrect(guess)) {
-                System.out.println("Браво!");
+                System.out.println("Браво позна!");
                 if (hangman.gameIsOver()) {
                     System.out.println("Браво! Позна \"" + hangman.getWord() + "\".");
                     return;
