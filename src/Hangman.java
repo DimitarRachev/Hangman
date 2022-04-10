@@ -28,6 +28,7 @@ public class Hangman {
         return this.word.length();
     }
 
+
     public boolean charIsAlreadyUsed(char guess) {
         return this.correctChars.contains(guess) || this.wrongChars.contains(guess);
     }
