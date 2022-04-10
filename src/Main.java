@@ -52,7 +52,7 @@ public class Main {
                 if (hangman.haveGuessesLeft()) {
                     System.out.println("Не позна, опитай пак!");
                 } else {
-                    System.out.println("Съжалявам, не успя да познаеш \"" +hangman.getWord() + "\"");
+                    System.out.println("Съжалявам, не успя да познаеш \"" + hangman.getWord() + "\"");
                     return;
                 }
             }
