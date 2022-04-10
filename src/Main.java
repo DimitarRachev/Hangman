@@ -32,11 +32,14 @@ public class Main {
 
         System.out.println("Намислих си населено място с " + word.length() + " букви.");
         System.out.println(hangman);
+        System.out.println("Имаш право на " + hangman.getGuessesLeft() + " грешки.");
         System.out.print("Въведи буква: ");
 
         while (true) {
             char guess = sysScanner.nextLine().toLowerCase(Locale.ROOT).charAt(0);
-            if (hangman.charIsAlreadyUsed(guess)) {
+            if (!hangman.charIsValid(guess)) {
+                System.out.println("Използвай само букви от кирилицата!");
+            } else if (hangman.charIsAlreadyUsed(guess)) {
                 System.out.println("Буква " + (char) guess + " вече е въвеждана!");
 
             } else if (hangman.charIsCorrect(guess)) {
@@ -46,13 +49,29 @@ public class Main {
                     return;
                 }
             } else {
-                System.out.println("Не позна, опитай пак!");
-
+                if (hangman.haveGuessesLeft()) {
+                    System.out.println("Не позна, опитай пак!");
+                } else {
+                    System.out.println("Съжалявам, не успя да познаеш населеното място!");
+                    return;
+                }
             }
-            System.out.println("Думата не съдържа: " + hangman.getWrongChars().stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            System.out.println();
             System.out.println(hangman);
+            if (hangman.getWrongChars() != null) {
+                System.out.println("Грешни букви: " + hangman.getWrongChars().stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            }
+            System.out.println("Имаш право на " + hangman.getGuessesLeft() + getCorrectWord(hangman.getGuessesLeft()));
             System.out.print("Въведи буква: ");
         }
+    }
+
+
+    private static String getCorrectWord(int guessesLeft) {
+        if (guessesLeft == 1) {
+            return " грешка.";
+        }
+        return " грешки.";
     }
 }
 

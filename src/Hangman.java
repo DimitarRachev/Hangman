@@ -6,12 +6,14 @@ public class Hangman {
     private List<Character> wrongChars;
     private final String word;
     private StringBuilder textToDisplay;
+    int guessesLeft;
 
     public Hangman(String word) {
         this.word = word;
         this.correctChars = new ArrayList<>();
         this.wrongChars = new ArrayList<>();
         this.textToDisplay = new StringBuilder();
+        this.guessesLeft = 10;
 
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) !=' ' ) {
@@ -44,6 +46,7 @@ public class Hangman {
         }
         // ADD TO incorrectList
         this.wrongChars.add(guess);
+        this.guessesLeft--;
         return false;
     }
 
@@ -52,7 +55,14 @@ public class Hangman {
         return this.textToDisplay.toString();
     }
 
+    public int getGuessesLeft() {
+        return guessesLeft;
+    }
+
     public List<Character> getWrongChars() {
+        if (wrongChars.size() == 0) {
+            return null;
+        }
         return this.wrongChars;
     }
 
@@ -62,5 +72,13 @@ public class Hangman {
 
     public boolean gameIsOver() {
         return this.textToDisplay.indexOf("_") < 0;
+    }
+
+    public boolean haveGuessesLeft() {
+        return this.guessesLeft > 0;
+    }
+
+    public boolean charIsValid(char guess) {
+        return guess >= 1072 && guess <=1103;
     }
 }
